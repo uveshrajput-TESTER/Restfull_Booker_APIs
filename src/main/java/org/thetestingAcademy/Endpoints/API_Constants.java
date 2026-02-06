@@ -6,5 +6,7 @@ public class API_Constants {
     public static String CREATE_Token = "/auth";
     public  static String Get_S_Booking = "/booking/";
     public static String Ping = "/ping";
+    public  static String FULL_Update_Booking = "/booking/";
+    public  static String DELETE_Booking = "/booking/";
 
 }

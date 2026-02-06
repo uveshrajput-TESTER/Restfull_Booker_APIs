@@ -1,4 +1,5 @@
-package org.thetestingAcademy.Tests.CRUD;
+package org.thetestingAcademy.Tests.E2E;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import io.restassured.RestAssured;
@@ -11,16 +12,19 @@ import org.thetestingAcademy.Base.BaseTest;
 import org.thetestingAcademy.Endpoints.API_Constants;
 import org.thetestingAcademy.Manager.Payload_Manager;
 import org.thetestingAcademy.Pojos.RequestPojos.Booking;
+import org.thetestingAcademy.Tests.CRUD.Positive_TestCases;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
 
-public class Get_booking extends BaseTest {
-    private static final Logger logger = LogManager.getLogger(Get_booking.class);
+//Get All Booking IDs and Get a Single Booking ID from all booking ids
+public class Flow1 extends BaseTest {
+    private static final Logger logger = LogManager.getLogger(Flow1.class);
 
-    @Test
-    @Description( "TC#1 :- Check That All the Bookings Get Successfully  Successfully ")
+    @Test(priority = 0)
+    @Description( "TC#1 :- Check That All the Bookings Get Successfully fetch ")
     @Owner("Uvesh  Ranghar")
     public void test_Get_ALl_IDS(ITestContext context){
         logger.info("Test Case Starting ");
@@ -37,10 +41,9 @@ public class Get_booking extends BaseTest {
         int  bookingid = bookingIds.get(1);
         System.out.println("bookingid --> "+ bookingid);
         context.setAttribute("ID",bookingid);
-        System.out.println(context.getAttribute("ID"));
     }
-    @Test
-    @Description( "TC#2 :- Check That Single  Bookings Get Successfully  Successfully ")
+    @Test(priority = 3)
+    @Description( "TC#4 :- Check That Single  Bookings Get Successfully  ")
     @Owner("Uvesh  Ranghar")
     public void test_Get_Single_ID(ITestContext context){
         logger.info("Test Case Starting ");
@@ -56,7 +59,5 @@ public class Get_booking extends BaseTest {
         Booking booking =  Payload_Manager.getSingleBooking(response.asString());
         assertActions.verifyStatusCode(response,200);
     }
-
-
 
 }

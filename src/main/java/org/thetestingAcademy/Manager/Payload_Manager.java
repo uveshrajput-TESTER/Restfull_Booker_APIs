@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.thetestingAcademy.Pojos.RequestPojos.Auth;
 import org.thetestingAcademy.Pojos.RequestPojos.Booking;
 import org.thetestingAcademy.Pojos.RequestPojos.Bookingdates;
+import org.thetestingAcademy.Pojos.RequestPojos.WrongBooking;
 import org.thetestingAcademy.Pojos.ResponsePojo.BookingResponse;
 import org.thetestingAcademy.Pojos.ResponsePojo.TokenResponse;
 
@@ -58,9 +59,20 @@ public class Payload_Manager {
         return jsonPayloadString;
 
     }
+    public static String setWrongAuthPayload(){
+        Auth auth = new Auth();
+        auth.setUsername("Admin");
+        auth.setPassword("password1234");
+
+        Gson  gson = new Gson();
+        String jsonPayloadString = gson.toJson(auth);
+        System.out.println("Payload set to the -> " + jsonPayloadString);
+        return jsonPayloadString;
+
+    }
     public static String Create_Booking(){
         Booking booking = new Booking();
-        booking.setFirstName("Ishita");
+        booking.setFirstName("Uvesh");
         booking.setLastName("Gupta");
         booking.setTotalPrice(12344);
         booking.setDepositPaid(false);
@@ -74,6 +86,73 @@ public class Payload_Manager {
         String createBooking = gson.toJson(booking);
         return createBooking;
 
+    }
+    public static String Create_Booking_with_Wrong_payload(){
+        Booking booking = new Booking();
+        booking.setTotalPrice(12344);
+        booking.setDepositPaid(false);
+        Bookingdates bookingdates = new Bookingdates();
+        bookingdates.setCheckin("2024-02-01");
+        bookingdates.setCheckout("2024-02-01");
+        booking.setBookingDates(bookingdates);
+        booking.setAdditionalNeeds("need Breakfast");
+        Gson gson  = new Gson();
+        String createBooking = gson.toJson(booking);
+        return createBooking;
+
+    }
+    public static String FUll_Update_Booking(){
+        Booking booking = new Booking();
+        booking.setFirstName("Uvesh");
+        booking.setLastName("papa");
+        booking.setTotalPrice(12547657);
+        booking.setDepositPaid(true);
+        Bookingdates bookingdates = new Bookingdates();
+        bookingdates.setCheckin("2024-02-01");
+        bookingdates.setCheckout("2024-02-05");
+        booking.setBookingDates(bookingdates);
+        booking.setAdditionalNeeds("need Breakfast");
+
+        Gson gson  = new Gson();
+        String updateBooking = gson.toJson(booking);
+        return updateBooking;
+    }
+    public static String FUll_Update_Booking_Wrong_Payload(){
+        Booking booking = new Booking();
+        booking.setTotalPrice(12547657);
+        booking.setDepositPaid(true);
+        Bookingdates bookingdates = new Bookingdates();
+        bookingdates.setCheckin("2024-02-01");
+        bookingdates.setCheckout("2024-02-05");
+        booking.setBookingDates(bookingdates);
+        booking.setAdditionalNeeds("need Breakfast");
+
+        Gson gson  = new Gson();
+        String updateBooking = gson.toJson(booking);
+        return updateBooking;
+    }
+    public static String Partially_Update_Booking(){
+        Booking booking = new Booking();
+        booking.setFirstName("Uvesh");
+        booking.setLastName("papa");
+        Bookingdates bookingdates = new Bookingdates();
+        bookingdates.setCheckin("2024-07-01");
+        bookingdates.setCheckout("2024-10-05");
+        booking.setBookingDates(bookingdates);
+        booking.setAdditionalNeeds("need Breakfast");
+
+        Gson gson  = new Gson();
+        String updateBooking = gson.toJson(booking);
+        return updateBooking;
+    }
+    public static String Partially_Update_Booking_with_wrongpayload(){
+        WrongBooking booking = new WrongBooking();
+        booking.setFirstname(543545);
+        booking.setLastname(32534543);
+        booking.setTotalprice(35464);
+        Gson gson  = new Gson();
+        String updateBooking = gson.toJson(booking);
+        return updateBooking;
     }
     // Convert the JSON String to Java Object so that we can verify response Body
     // DeSerialization
@@ -96,4 +175,5 @@ public class Payload_Manager {
         Gson gson = new Gson();
         Booking booking = gson.fromJson(responseString,Booking.class);return booking;
     }
+
 }
